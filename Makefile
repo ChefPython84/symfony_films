@@ -2,7 +2,7 @@
 
 DOCKER = docker
 DOCKER_COMPOSE = docker-compose
-EXEC = $(DOCKER) exec -w /var/www/project www_mmi
+EXEC = $(DOCKER) exec -w /var/www/ www_mmi_films
 PHP = $(EXEC) php
 COMPOSER = $(EXEC) composer
 NPM = $(EXEC) npm
