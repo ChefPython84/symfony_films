@@ -22,7 +22,7 @@ class ActorRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Actor[] Returns an array of Actor objects
+//     * @return ActorFixtures[] Returns an array of ActorFixtures objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class ActorRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Actor
+//    public function findOneBySomeField($value): ?ActorFixtures
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')
