@@ -16,7 +16,7 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager): void
     {
         $faker = Faker\Factory::create('fr_FR');
-        foreach (range(1, 10) as $i) {
+        foreach (range(1, 60) as $i) {
             $actor = new Actor();
             $actor->setFirstName($faker->firstName);
             $actor->setLastName($faker->lastName);
