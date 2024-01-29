@@ -17,8 +17,7 @@ class MovieFixtures extends Fixture implements DependentFixtureInterface
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Movie($faker));
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Person($faker));
 
-
-        foreach (range(1, 40) as $i) {
+        foreach (range(1, 100) as $i) {
             $movie = new Movie();
             $movie->setTitle($faker->movie);
             $movie->setDescription($faker->overview);
