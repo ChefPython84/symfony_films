@@ -9,18 +9,17 @@ use App\Entity\Actor;
 use App\Entity\Category;
 use App\Entity\Movie;
 use App\Entity\Nationality;
+use Faker;
 
 class ActorFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $firstNames = ['Jean', 'Marc', 'Pierre', 'Paul', 'Erwan', 'Marie', 'Julie', 'Sophie', 'Alice', 'Julien'];
-        $lastNames = ['Dupont', 'Durand', 'Duche', 'Duchê', 'Gaut', 'Bréaute', 'Croi', 'Couturier', 'Louhi', 'Pet'];
-
+        $faker = Faker\Factory::create('fr_FR');
         foreach (range(1, 10) as $i) {
             $actor = new Actor();
-            $actor->setFirstName($firstNames[$i - 1]);
-            $actor->setLastName($lastNames[$i - 1]);
+            $actor->setFirstName($faker->firstName);
+            $actor->setLastName($faker->lastName);
             $actor->setNationality($this->getReference('nationality_' . rand(1, 10)));
             $actor->setReward(rand(0, 200));
             $manager->persist($actor);
