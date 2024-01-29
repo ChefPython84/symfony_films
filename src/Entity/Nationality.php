@@ -11,7 +11,7 @@ use ApiPlatform\Metadata\ApiResource;
 #[ORM\Entity(repositoryClass: NationaliteRepository::class)]
 #[ApiResource]
 
-class Nationalite
+class Nationality
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

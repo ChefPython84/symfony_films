@@ -22,10 +22,7 @@ class Actor
     private ?string $reward = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nationality = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $fisrtName = null;
+    private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
@@ -34,7 +31,7 @@ class Actor
     private Collection $movies;
 
     #[ORM\ManyToOne(inversedBy: 'actors')]
-    private ?Nationalite $nationalite = null;
+    private ?Nationality $nationality = null;
 
     public function __construct()
     {
@@ -58,26 +55,14 @@ class Actor
         return $this;
     }
 
-    public function getNationality(): ?string
+    public function getFirstName(): ?string
     {
-        return $this->nationality;
+        return $this->firstName;
     }
 
-    public function setNationality(string $nationality): static
+    public function setFirstName(string $firstName): static
     {
-        $this->nationality = $nationality;
-
-        return $this;
-    }
-
-    public function getFisrtName(): ?string
-    {
-        return $this->fisrtName;
-    }
-
-    public function setFisrtName(string $fisrtName): static
-    {
-        $this->fisrtName = $fisrtName;
+        $this->firstName = $firstName;
 
         return $this;
     }
@@ -118,14 +103,14 @@ class Actor
         return $this;
     }
 
-    public function getNationalite(): ?Nationalite
+    public function getNationality(): ?Nationality
     {
-        return $this->nationalite;
+        return $this->nationality;
     }
 
-    public function setNationalite(?Nationalite $nationalite): static
+    public function setNationality(?Nationality $nationality): static
     {
-        $this->nationalite = $nationalite;
+        $this->nationality = $nationality;
 
         return $this;
     }

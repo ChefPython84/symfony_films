@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Nationalite;
+use App\Entity\Nationality;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Nationalite>
+ * @extends ServiceEntityRepository<Nationality>
  *
- * @method Nationalite|null find($id, $lockMode = null, $lockVersion = null)
- * @method Nationalite|null findOneBy(array $criteria, array $orderBy = null)
- * @method Nationalite[]    findAll()
- * @method Nationalite[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Nationality|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Nationality|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Nationality[]    findAll()
+ * @method Nationality[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class NationaliteRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Nationalite::class);
+        parent::__construct($registry, Nationality::class);
     }
 
 //    /**
-//     * @return Nationalite[] Returns an array of Nationalite objects
+//     * @return Nationality[] Returns an array of Nationality objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class NationaliteRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Nationalite
+//    public function findOneBySomeField($value): ?Nationality
 //    {
 //        return $this->createQueryBuilder('n')
 //            ->andWhere('n.exampleField = :val')
