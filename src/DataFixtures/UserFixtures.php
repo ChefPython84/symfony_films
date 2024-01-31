@@ -30,9 +30,9 @@ class UserFixtures extends Fixture
         $user_2->setPassword($this->passwordHasher->hashPassword($user_2, 'password'));
         $user_3->setPassword($this->passwordHasher->hashPassword($user_3, 'password'));
 
-        //$user->setRoles(['ROLE_ADMIN']);
-        //$user_2->setRoles(['ROLE_USER']);
-        //$user_3->setRoles(['ROLE_ADMIN']);
+        $user->setRoles(['ROLE_ADMIN']);
+        $user_2->setRoles(['ROLE_USER']);
+        $user_3->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($user);
         $manager->persist($user_2);
