@@ -8,47 +8,63 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['movie:read']]
+)]
 
 class Movie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['movie:read', 'actor:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Groups(['movie:read'])]
     private ?\DateTimeInterface $release_date = null;
 
+
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['movie:read',])]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['movie:read'])]
     private ?int $duration = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['movie:read'])]
     private ?float $note = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['movie:read'])]
     private ?int $entries = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['movie:read'])]
     private ?int $budget = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['movie:read'])]
     private ?string $director = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['movie:read'])]
     private ?string $website = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['movie:read', 'actor:read', 'category:read'])]
     private ?string $title = null;
 
+    #[Groups(['movie:read'])]
     #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'movies')]
     private Collection $actors;
 
+    #[Groups(['movie:read'])]
     #[ORM\ManyToOne(inversedBy: 'movies')]
     private ?Category $Category = null;
 
