@@ -2,35 +2,48 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use App\Repository\ActorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['actor:read']],
+    denormalizationContext: ['groups' => ['actor:write']],
+)]
+#[ApiFilter(SearchFilter::class, properties: ['lastName' => 'partial' ])]
 #[ORM\Entity(repositoryClass: ActorRepository::class)]
 class Actor
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['actor:read', 'actor:write', 'movie:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['actor:read', 'actor:write', 'movie:read'])]
     private ?string $reward = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['actor:read', 'actor:write', 'movie:read'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['actor:read', 'actor:write', 'movie:read'])]
     private ?string $lastName = null;
 
     #[ORM\ManyToMany(targetEntity: Movie::class, mappedBy: 'actors')]
+    #[Groups(['actor:read'])]
     private Collection $movies;
 
     #[ORM\ManyToOne(inversedBy: 'actors')]
+    #[Groups(['actor:read', 'actor:write', 'movie:read'])]
     private ?Nationality $nationality = null;
 
     public function __construct()

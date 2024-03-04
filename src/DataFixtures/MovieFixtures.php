@@ -17,15 +17,19 @@ class MovieFixtures extends Fixture implements DependentFixtureInterface
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Movie($faker));
         $faker->addProvider(new \Xylis\FakerCinema\Provider\Person($faker));
 
-        foreach (range(1, 100) as $i) {
+        foreach (range(1, 200) as $i) {
             $movie = new Movie();
             $movie->setTitle($faker->movie);
             $movie->setDescription($faker->overview);
             $movie->setDuration(rand(60, 180));
             $movie->setReleaseDate(new \DateTime());
             $movie->setCategory($this->getReference('category_' . rand(1, 5)));
-            $movie->addActor($this->getReference('actor_' . rand(1, 10)));
-            //$movie->setOnline(rand(0, 1) === 1);
+            //ajouter plusieurs acteurs
+            $numActors = rand(3, 8); // Vous pouvez ajuster le nombre d'acteurs selon vos besoins
+
+            for ($i = 0; $i < $numActors; $i++) {
+                $movie->addActor($this->getReference('actor_' . rand(1, 60)));
+            }            //$movie->setOnline(rand(0, 1) === 1);
             $movie->setNote(rand(0, 10));
             $movie->setEntries(rand(0, 1000000));
             $movie->setBudget(rand(0, 1000000));
