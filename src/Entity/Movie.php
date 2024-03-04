@@ -11,6 +11,8 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Attribute\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 #[ApiResource(
@@ -30,38 +32,56 @@ class Movie
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     #[Groups(['movie:read', 'movie:write', 'actor:read', 'category:read'])]
+    #[Assert\Type("\DateTimeInterface")
+    ]
+    #[Assert\NotBlank]
     private ?\DateTimeInterface $release_date = null;
 
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     #[Groups(['movie:read', 'movie:write', 'actor:read', 'category:read'])]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type("integer")]
+    #[Assert\NotBlank]
     #[Groups(['movie:read', 'movie:write'])]
     private ?int $duration = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type("float")]
+    #[Assert\NotBlank]
     #[Groups(['movie:read', 'movie:write'])]
     private ?float $note = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type("integer")]
+    #[Assert\NotBlank]
     #[Groups(['movie:read', 'movie:write'])]
     private ?int $entries = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type("integer")]
+    #[Assert\NotBlank]
     #[Groups(['movie:read', 'movie:write'])]
     private ?int $budget = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     #[Groups(['movie:read', 'movie:write'])]
     private ?string $director = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Url]
     #[Groups(['movie:read', 'movie:write'])]
     private ?string $website = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     #[Groups(['movie:read', 'movie:write', 'actor:read', 'category:read'])]
     private ?string $title = null;
 

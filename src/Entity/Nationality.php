@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NationaliteRepository::class)]
 #[ApiResource(normalizationContext: ['groups' =>
@@ -23,6 +24,8 @@ class Nationality
 
     #[ORM\Column(length: 255)]
     #[Groups(['actor:read', 'nationality:read'])]
+    #[Assert\NotBlank]
+    #[Assert\Length(min: 3, max: 255)]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'nationalite', targetEntity: Actor::class)]
