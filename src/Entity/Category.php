@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,18 +12,20 @@ use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['category:read']])]
+#[ApiResource(normalizationContext: ['groups' => ['category:read']],
+    denormalizationContext: ['groups' => ['category:write']])]
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial'])]
 
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['category:read', 'movie:read'])]
+    #[Groups(['category:read', 'category:write', 'movie:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['category:read', 'movie:read'])]
+    #[Groups(['category:read', 'category:write', 'movie:read'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Movie::class)]

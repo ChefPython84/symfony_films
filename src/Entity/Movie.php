@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use App\Repository\MovieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,52 +14,55 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: MovieRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['movie:read']]
+    normalizationContext: ['groups' => ['movie:read']],
+    denormalizationContext: ['groups' => ['movie:write']],
+
 )]
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial'],)]
 
 class Movie
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['movie:read', 'actor:read'])]
+    #[Groups(['movie:read', 'movie:write', 'actor:read', 'category:read'])]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'movie:write', 'actor:read', 'category:read'])]
     private ?\DateTimeInterface $release_date = null;
 
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['movie:read',])]
+    #[Groups(['movie:read', 'movie:write', 'actor:read', 'category:read'])]
     private ?string $description = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'movie:write'])]
     private ?int $duration = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'movie:write'])]
     private ?float $note = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'movie:write'])]
     private ?int $entries = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'movie:write'])]
     private ?int $budget = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'movie:write'])]
     private ?string $director = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['movie:read'])]
+    #[Groups(['movie:read', 'movie:write'])]
     private ?string $website = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['movie:read', 'actor:read', 'category:read'])]
+    #[Groups(['movie:read', 'movie:write', 'actor:read', 'category:read'])]
     private ?string $title = null;
 
     #[Groups(['movie:read'])]

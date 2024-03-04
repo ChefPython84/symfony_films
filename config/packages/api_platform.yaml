@@ -18,3 +18,10 @@ api_platform:
     keep_legacy_inflector: false
     graphql:
         enabled: true
+
+    collection:
+        pagination:
+            page_parameter_name: _page
+            items_per_page_parameter_name: _items_per_page
+
+
