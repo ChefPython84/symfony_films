@@ -17,7 +17,7 @@ api_platform:
     event_listeners_backward_compatibility_layer: false
     keep_legacy_inflector: false
     graphql:
-        enabled: true
+        enabled: false
 
     collection:
         pagination:
