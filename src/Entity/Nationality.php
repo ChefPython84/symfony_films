@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: NationaliteRepository::class)]
 #[ApiResource(normalizationContext: ['groups' =>
-    ['nationality:read']])]
+    ['nationality:read']],denormalizationContext: ['groups' =>['nationality:write']])]
 
 class Nationality
 {
@@ -23,7 +23,7 @@ class Nationality
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['actor:read', 'nationality:read'])]
+    #[Groups(['actor:read', 'nationality:read', 'nationality:write'])]
     #[Assert\NotBlank]
     #[Assert\Length(min: 3, max: 255)]
     private ?string $name = null;
