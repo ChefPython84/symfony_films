@@ -1,0 +1,3 @@
+[submodule "front_symfony_films"]
+	path = front_symfony_films
+	url = https://github.com/ChefPython84/front_symfony_films.git
