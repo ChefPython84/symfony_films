@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource(normalizationContext: ['groups' => ['category:read']],
     denormalizationContext: ['groups' => ['category:write']])]
-#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial'])]
+#[ApiFilter(SearchFilter::class, properties: ['name' => 'partial'])]
 
 class Category
 {
@@ -33,7 +33,7 @@ class Category
     #[Groups(['category:read', 'category:write', 'movie:read'])]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Movie::class)]
+    #[ORM\OneToMany(mappedBy: 'Category', targetEntity: Movie::class, cascade: ['persist', 'remove'])]
     #[Groups(['category:read'])]
     private Collection $movies;
 
