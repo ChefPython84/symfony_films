@@ -29,25 +29,38 @@ Projet Symfony de gestion de films avec une configuration Docker.
     cd symfony_films
     ```
 
-**Modifiez le fichier `.env` avec vos configurations.**
-
-3.**Lancez Docker Compose pour construire les conteneurs :**
+**Lancez Docker Compose pour construire les conteneurs :**
 
     ```bash
     docker-compose up -d
     ```
-
-4.**Installez les dépendances Symfony via Composer :**
-
-    ```bash
-    docker-compose exec php composer install
-    ```
-
-5.**Exécutez les migrations pour créer la base de données :**
+**Se conneter au conteneur www_mmi_films:**
 
     ```bash
-    docker-compose exec php bin/console doctrine:migrations:migrate
+    docker-compose exec -ti www_mmi_films /bin/bash
     ```
+**Installez les dépendances PHP avec Composer :**
+
+    ```bash
+    composer install
+    ```
+
+**Créez la base de données :**
+
+    ```bash
+    php bin/console doctrine:database:create
+    ```
+**Mettre à jour la base de données :**
+
+    ```bash
+    php bin/console doctrine:migrations:migrate
+    ```
+**Charger les données de test :**
+
+    ```bash
+    php bin/console doctrine:fixtures:load
+    ```
+**Accédez à l'application Symfony dans le navigateur :**
 
 ## Configuration
 
@@ -62,7 +75,13 @@ Ports exposés :
 - Pas de mot de passe pour l'utilisateur root
 
 
-## Utilisation
+#### Connexion à MovieHub
+
+- **email** : user@gamil.com
+- **mot de passe** : password
+
+
+## Aides
 
 - Accédez à l'application Symfony dans le navigateur : [http://localhost:8000](http://localhost:8000)
 - Accédez à PhpMyAdmin pour gérer la base de données : [http://localhost:8080](http://localhost:8080)
